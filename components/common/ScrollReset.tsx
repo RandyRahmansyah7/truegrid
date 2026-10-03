@@ -19,8 +19,10 @@ export default function ScrollReset() {
     // If there is an anchor hash on refresh, clean it and jump to top
     if (window.location.hash) {
       window.history.replaceState(null, "", window.location.pathname);
+      requestAnimationFrame(resetScroll);
+    } else if (window.scrollY > 0) {
+      requestAnimationFrame(resetScroll);
     }
-    resetScroll();
 
     return () => {
       window.removeEventListener("beforeunload", resetScroll);
